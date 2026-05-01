@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parasu Kolur Singer | Official Portfolio</title>
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Hind+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF0000; /* Your brand accent */
+            --bg-dark: #0a0a0a;
+            --bg-card: #161616;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Hind Kannada', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- Hero Section --- */
+        #home {
+            height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 10%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), var(--bg-dark)),
+                        radial-gradient(circle at top right, #300000 0%, transparent 40%);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 10vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.5);
+        }
+
+        /* --- YouTube Feed --- */
+        section { padding: 6rem 8%; }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .video-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+        }
+
+        .video-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: white;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .video-card:hover .play-icon { opacity: 0.9; }
+
+        .video-info { padding: 1.5rem; }
+        .video-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; }
+
+        /* --- Contact Form --- */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        input, textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: #000;
+            border: 1px solid #222;
+            color: white;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 5rem 8% 2rem;
+            text-align: center;
+            background: #050505;
+        }
+
+        .social-links {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-dim);
+            font-size: 1.8rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover { color: var(--primary); transform: translateY(-5px); }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .contact-container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">PARASU<span> KOLUR</span></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#videos">New Releases</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero-content">
+            <h1>SINGER <span style="color: var(--primary)">PARASU</span> KOLUR</h1>
+            <p>Popular Kannada Singer & Content Creator. Experience the soulful melodies and high-energy folk tracks from the heart of Karnataka.</p>
+            <div class="cta-btns">
+                <a href="#videos" class="btn btn-primary">Listen Now</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="videos">
+        <h2 class="section-title">Latest Transmissions</h2>
+        <div class="video-grid" id="youtubeFeed">
+            <p style="text-align:center; grid-column: 1/-1;">Connecting to YouTube Satellite...</p>
+        </div>
+    </section>
+
+    <section id="about" style="background: #0d0d0d;">
+        <h2 class="section-title">The Artist</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--text-dim);">
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                Specializing in **Tatvapad** and philosophical folk music, Parasu Kolur brings a modern touch to traditional Kannada melodies. With a growing community of music lovers, this channel is dedicated to soulful storytelling and rhythmic excellence.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Bookings & Inquiries</h2>
+        <div class="contact-container">
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message / Booking Details" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; border:none; cursor: pointer;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://youtube.com/@parasu_kolur_singer" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+        <p style="color: #444; font-size: 0.9rem;">&copy; 2026 Parasu Kolur Singer. Crafted for Excellence.</p>
+    </footer>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const links = document.getElementById('navLinks');
+            links.classList.toggle('active');
+        }
+
+        // --- YouTube RSS Integration ---
+        // REPLACE THIS ID with your actual YouTube Channel ID (starts with UC...)
+        const CHANNEL_ID = 'YOUR_CHANNEL_ID_HERE'; 
+        
+        const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+        const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+
+        async function fetchVideos() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                const container = document.getElementById('youtubeFeed');
+                container.innerHTML = '';
+
+                if (data.items && data.items.length > 0) {
+                    data.items.slice(0, 3).forEach(video => {
+                        // The video ID is part of the guid or link
+                        const videoId = video.link.split('v=')[1];
+                        const videoCard = `
+                            <div class="video-card">
+                                <a href="${video.link}" target="_blank" style="text-decoration:none; color:inherit;">
+                                    <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg')">
+                                        <div class="play-icon"><i class="fas fa-play-circle"></i></div>
+                                    </div>
+                                    <div class="video-info">
+                                        <h3>${video.title}</h3>
+                                        <p style="color:var(--primary); font-weight:700;">PLAY NOW <i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i></p>
+                                    </div>
+                                </a>
+                            </div>
+                        `;
+                        container.innerHTML += videoCard;
+                    });
+                } else {
+                    container.innerHTML = '<p style="text-align:center; grid-column:1/-1;">Please enter a valid Channel ID in the code to display videos.</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('youtubeFeed').innerHTML = '<p>Feed offline. Check Channel ID settings.</p>';
+            }
+        }
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Initialize
+        fetchVideos();
+    </script>
+</body>
+</html>
