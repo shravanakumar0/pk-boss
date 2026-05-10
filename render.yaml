@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: contriblow
+    env: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5000"
